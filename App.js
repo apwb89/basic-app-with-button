@@ -1,20 +1,56 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Button,
+  Alert,
+} from 'react-native';
 
-export default function App() {
+
+import db from './firebase-config';
+
+function App() {
+  const [ test, setTest ] = useState('unpressed')
+
+  const buttonPress = () => {
+    setTest('pressed')
+  }
+
+  useEffect(() => {
+
+  }, [test])
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={styles.setMargin}>
+      <Button title="top-of-app" style={styles.button} onPress={buttonPress}>Button</Button>
+      
+      <View style={styles.red} onPress={buttonPress}>
+      </View>
+      <Text style={styles.red}>{test}</Text>
+  
     </View>
   );
 }
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  header: {
+    fontSize: 20,
+    fontWeight: 'bold',
   },
+  setMargin: {
+    marginTop: 50,
+  },
+  button: {
+    width: 50,
+    height: 50,
+    backgroundColor: 'blue',
+  },
+
+red: {
+  backgroundColor: "red",
+  height: 100,
+}
 });
+
+export default App;
